@@ -35,10 +35,10 @@ const tokenHelper = {
     }
 }
 
-const { createToken, verifyToken, tokenVerifierMiddleware } = tokenHelper
+// const { createToken, verifyToken, tokenVerifierMiddleware } = tokenHelper
 
-tokenHelper.createToken = createToken.bind(tokenHelper)
-tokenHelper.verifyToken = verifyToken.bind(tokenHelper)
-tokenHelper.tokenVerifierMiddleware = tokenVerifierMiddleware.bind(tokenHelper)
+// tokenHelper.createToken = createToken.bind(tokenHelper)
+// tokenHelper.verifyToken = verifyToken.bind(tokenHelper)
+// tokenHelper.tokenVerifierMiddleware = tokenVerifierMiddleware.bind(tokenHelper)
 
 module.exports = tokenHelper

@@ -1,11 +1,18 @@
 'use strict'
+const logic = require('../../logic')
 
-module.exports = (req, res) => {
-    const { body: { name, surname, email, password, passwordConfirm } } = req
+
+module.exports = async (req, res) => {
+    const { body: { name, surname, email, password } } = req
 
     try {
-        //do something
+
+        const response = await logic.registerUser(name, surname, email, password)
+        console.log(`response => ${response}`)
+
+        res.json({ message: 'works fine' })
+
     } catch ({ message }) {
-        res.status(404).json({ error: message })
+        return res.status(500).json({ error: message })
     }
 }

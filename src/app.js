@@ -1,21 +1,21 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+const router = require('./routes')
 
-const app = express()
+//get env variables
+const { env: { PORT, DB_URL } } = process
+const port = PORT || 5000
 
-const { env: { DB_URL } } = process
-const port = process.env.PORT || 5000
 
-console.log(DB_URL)
-
-mongoose
-    .connect(
-        DB_URL,
-        { useNewUrlParser: true }
-    )
+mongoose.connect(DB_URL, { useNewUrlParser: true })
     .then(() => {
         console.log('MongoDB Connected')
+
+        //init express
+        const app = express()
+        app.use('/api', router)
+
         app.listen(port, console.log(`Server started on port ${port}`))
     })
     .catch(err => console.log(err));
