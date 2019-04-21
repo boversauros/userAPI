@@ -29,9 +29,36 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     }
-    
+
 }, { timestamps: true })
 
+userSchema.statics.cleanUser = function (user) {
+    //modificate user
+    user.id = user._id
+
+    //delete sensitive data
+    delete user._id
+    delete user.password
+
+    //return user
+    return user
+}
+
+
+userSchema.statics.cleanUsers = function (users) {
+    return users.map(user => {
+
+        //modificate user
+        user.id = user._id
+
+        //delete sensitive data
+        delete user._id
+        delete user.password
+
+        //return user
+        return user
+    })
+}
 
 const User = mongoose.model('User', userSchema)
 

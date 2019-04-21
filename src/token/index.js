@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const tokenHelper = {
     jwtSecret: null,
 
-    createtoken(userId) {
+    createToken(userId) {
         return jwt.sign({ sub: userId }, this.jwtSecret, { expiresIn: '72h' })
     },
 
@@ -35,10 +35,12 @@ const tokenHelper = {
     }
 }
 
-// const { createToken, verifyToken, tokenVerifierMiddleware } = tokenHelper
 
-// tokenHelper.createToken = createToken.bind(tokenHelper)
-// tokenHelper.verifyToken = verifyToken.bind(tokenHelper)
-// tokenHelper.tokenVerifierMiddleware = tokenVerifierMiddleware.bind(tokenHelper)
+
+const { createToken, verifyToken, tokenVerifierMiddleware } = tokenHelper
+
+tokenHelper.createToken = createToken.bind(tokenHelper)
+tokenHelper.verifyToken = verifyToken.bind(tokenHelper)
+tokenHelper.tokenVerifierMiddleware = tokenVerifierMiddleware.bind(tokenHelper)
 
 module.exports = tokenHelper

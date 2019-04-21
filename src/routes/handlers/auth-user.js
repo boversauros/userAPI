@@ -1,13 +1,16 @@
 'use strict'
+
 const logic = require('../../logic')
+const { createToken } = require('../../token')
 const { handleResponseError } = require('../route-helpers')
 
 module.exports = async (req, res) => {
-    const { body: { name, surname, email, password } } = req
+    const { body: { email, password } } = req
 
     try {
-        const userId = await logic.registerUser(name, surname, email, password)
-        res.json({ status: true, userId })
+        const { id } = await logic.authUser(email, password)
+        const token = createToken(id)
+        return res.json({ token })
     } catch (error) {
         handleResponseError(error, res)
     }

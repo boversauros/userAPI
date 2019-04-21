@@ -2,15 +2,18 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const router = require('./routes')
+const tokenHelper = require('./token')
 
 //get env variables
-const { env: { PORT, DB_URL } } = process
+const { env: { PORT, DB_URL, SECRET } } = process
 const port = PORT || 5000
 
 
 mongoose.connect(DB_URL, { useNewUrlParser: true })
     .then(() => {
         console.log('MongoDB Connected')
+        //init token secret
+        tokenHelper.jwtSecret = SECRET
 
         //init express
         const app = express()
