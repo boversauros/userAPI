@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator: email => {
-                return /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/.test(email);
+                return /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/.test(email)
             },
             message: props => `${props.value} is not a valid email`
         }
@@ -32,32 +32,13 @@ const userSchema = new mongoose.Schema({
 
 }, { timestamps: true })
 
-userSchema.statics.cleanUser = function (user) {
-    //modificate user
-    user.id = user._id
-
-    //delete sensitive data
-    delete user._id
-    delete user.password
-
-    //return user
-    return user
-}
-
-
-userSchema.statics.cleanUsers = function (users) {
-    return users.map(user => {
-
-        //modificate user
-        user.id = user._id
-
-        //delete sensitive data
-        delete user._id
-        delete user.password
-
-        //return user
-        return user
-    })
+userSchema.methods.toJSON = function () {
+    var obj = this.toObject()
+    obj.id = obj._id
+    delete obj._id
+    delete obj.password
+    delete obj.__v
+    return obj
 }
 
 const User = mongoose.model('User', userSchema)

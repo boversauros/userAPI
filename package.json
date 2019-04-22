@@ -1,7 +1,7 @@
 {
   "name": "userAPI",
-  "version": "0.1.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Basic user CRUD",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "3.0.6",
     "body-parser": "1.18.3",
     "cors": "^2.8.5",
     "dotenv": "7.0.0",

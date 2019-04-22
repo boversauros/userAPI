@@ -19,7 +19,7 @@ const logic = {
             const newUser = await User.create({ name, surname, email, password: hash })
 
             //return new user id
-            return newUser._id
+            return newUser.id
         } catch ({ message }) {
             throw new Error(message)
         }
@@ -35,6 +35,39 @@ const logic = {
 
             return { id: user._id }
 
+        } catch ({ message }) {
+            throw new Error(message)
+        }
+    },
+
+    async retrieveUser(userId) {
+        try {
+            const user = await User.findById(userId)
+            if (!user) throw new NotFoundError(`user not found`)
+
+            return { user }
+        } catch ({ message }) {
+            throw new Error(message)
+        }
+    },
+
+    async updateUser(userId, data) {
+        try {
+            const userUpdated = await User.findByIdAndUpdate(userId, data, { new: true })
+            if (!userUpdated) throw new Error('something went wrong')
+
+            return { user: userUpdated }
+        } catch ({ message }) {
+            throw new Error(message)
+        }
+    },
+
+    async deleteUser(userId) {
+        try {
+            const userDeleted = await User.findByIdAndDelete(userId)
+            if (!userDeleted) throw new Error('something went wrong')
+
+            return { status: true, message: 'user deleted' }
         } catch ({ message }) {
             throw new Error(message)
         }
