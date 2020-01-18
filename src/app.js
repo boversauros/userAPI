@@ -21,5 +21,7 @@ mongoose.connect(DB_URL, { useNewUrlParser: true })
 
         app.listen(port, console.log(`Server started on port ${port}`))
     })
-    .catch(err => console.log(err));
-
+    .catch(err => {
+        console.log('error on starting mongoose')
+        process.exit(1)
+    })
