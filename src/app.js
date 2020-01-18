@@ -9,7 +9,7 @@ const { env: { PORT, DB_URL, SECRET } } = process
 const port = PORT || 5000
 
 
-mongoose.connect(DB_URL, { useNewUrlParser: true })
+mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB Connected')
         //init token secret
