@@ -11,7 +11,7 @@ const port = PORT || 5000
 
 mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        console.log('MongoDB Connected')
+        console.info('MongoDB Connected')
         //init token secret
         tokenHelper.jwtSecret = SECRET
 
@@ -22,6 +22,6 @@ mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
         app.listen(port, console.log(`Server started on port ${port}`))
     })
     .catch(err => {
-        console.log('error on starting mongoose')
+        console.info('error on starting mongoose', err)
         process.exit(1)
     })
