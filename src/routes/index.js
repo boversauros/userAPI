@@ -9,12 +9,13 @@ const { tokenVerifierMiddleware } = tokenHelper
 const jsonbp = bp.json()
 
 const router = express.Router()
-const { registerUser, authUser, retrieveUser, updateUser, deleteUser } = require('./handlers')
+const { retrieveUsers, registerUser, authUser, retrieveUser, updateUser, deleteUser } = require('./handlers')
 
 //cors compability
 router.use(cors())
 
 //routes
+router.get('/users', jsonbp, retrieveUsers)
 router.post('/register', jsonbp, registerUser)
 router.post('/auth', jsonbp, authUser)
 router.get('/user', tokenVerifierMiddleware, retrieveUser)

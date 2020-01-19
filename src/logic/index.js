@@ -40,6 +40,15 @@ const logic = {
         }
     },
 
+    async retrieveUsers() {
+        try {
+            const users = await User.find({})
+            return users
+        } catch ({ message }) {
+            throw new Error(message)
+        }
+    },
+
     async retrieveUser(userId) {
         try {
             const user = await User.findById(userId)
